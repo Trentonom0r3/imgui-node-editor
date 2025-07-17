@@ -89,15 +89,17 @@ if (glfw3_FOUND)
         glfw
     )
 endif()
-
+set(HAVE_OPENGL 1)
+set(HAVE_GLFW3 1)
 configure_file(
     source/config.h.in
     ${CMAKE_CURRENT_BINARY_DIR}/source/config.h
 )
 
 target_compile_definitions(application PRIVATE
-    #BACKEND_CONFIG=IMGUI_GLFW
-    #RENDERER_CONFIG=IMGUI_OGL3
+    BACKEND_CONFIG=IMGUI_GLFW
+    RENDERER_CONFIG=IMGUI_OGL3
+    IMGUI_IMPL_OPENGL_LOADER_GLAD
 )
 
 target_include_directories(application PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/source)

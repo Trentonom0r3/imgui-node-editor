@@ -2,15 +2,11 @@ cmake_minimum_required(VERSION 3.12)
 
 project(imgui-node-editor)
 
-# Define IMGUI_NODE_EDITOR_ROOT_DIR pointing to project root directory
-get_filename_component(IMGUI_NODE_EDITOR_ROOT_DIR ${CMAKE_SOURCE_DIR}/.. ABSOLUTE CACHE)
-
-# Enable solution folders in Visual Studio and Folders in Xcode
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-# Point CMake where to look for module files.
+# If this is in extern/imgui-node-editor/examples/CMakeLists.txt:
+set(IMGUI_NODE_EDITOR_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/.." CACHE PATH "ImGui Node Editor Root" FORCE)
+get_filename_component(IMGUI_NODE_EDITOR_ROOT_DIR "${IMGUI_NODE_EDITOR_ROOT_DIR}" ABSOLUTE)
 list(APPEND CMAKE_MODULE_PATH ${IMGUI_NODE_EDITOR_ROOT_DIR}/misc/cmake-modules)
-
+message(STATUS "CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
 # Node editor use C++14
 set(CMAKE_CXX_STANDARD            14)
 set(CMAKE_CXX_STANDARD_REQUIRED   YES)
@@ -127,8 +123,4 @@ endmacro()
 
 add_subdirectory(application)
 
-add_subdirectory(canvas-example)
-add_subdirectory(simple-example)
-add_subdirectory(widgets-example)
-add_subdirectory(basic-interaction-example)
 add_subdirectory(blueprints-example)
